@@ -35,8 +35,8 @@ Make font-based queries useless for distinguishing any two users running:
 * the same major version of the same browser
 * on the same version of the same operating system
 * in the same locale (the [tag](https://tools.ietf.org/html/rfc5646) negotiated
-  by the Accept-Language header, usually a country and language of the form
-  "en-GB").
+  by the `Accept-Language` header, usually one language+country pair of the form
+  "en-GB", not the whole `Accept-Language` list).
 
 ## Non-goals
 
@@ -57,7 +57,8 @@ non-default fonts.
 
 ## Proposal
 
-Each browser will be able to map from a locale to:
+Each browser will be able to map from a locale (as in [Goals](#goals), just the
+negotiated language+country pair, not the whole `Accept-Language` list) to:
 
 ### Allowed system fonts
 
@@ -99,7 +100,7 @@ as long as the cache never evicts fonts. This allows exactly one site to
 determine that a user has not visited any site that either uses the font or has
 tried to learn this fact about the user.
 
-If the user removes a locale from their Accept-Language list, it's plausible to
+If the user removes a locale from their `Accept-Language` list, it's plausible to
 evict fonts that aren't common for their new set of locales. If the user then
 re-adds that locale, it gives one site another chance to learn something about
 that user, but changing the Accept-Language list is rare enough that this seems
