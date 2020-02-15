@@ -14,6 +14,7 @@ the web. You're welcome to [contribute](CONTRIBUTING.md)!
 - [Key scenarios](#key-scenarios)
 - [Detailed design discussion](#detailed-design-discussion)
   - [When to cache the webfonts](#when-to-cache-the-webfonts)
+  - [How to support dynamic font subsetting?](#how-to-support-dynamic-font-subsetting)
 - [Considered alternatives](#considered-alternatives)
   - [Just define one list of fonts, not depending on locale](#just-define-one-list-of-fonts-not-depending-on-locale)
   - [Define a set of local fonts](#define-a-set-of-local-fonts)
@@ -106,6 +107,26 @@ re-adds that locale, it gives one site another chance to learn something about
 that user, but changing the Accept-Language list is rare enough that this seems
 acceptable.
 
+### How to support dynamic font subsetting?
+
+https://blog.typekit.com/2015/06/15/announcing-east-asian-web-font-support/
+describes a piece of Javascript that dynamically requests the particular
+characters within a font that a particular page actually uses. This presents
+some difficulties for the approach here, depending on how exactly the Javascript
+works:
+
+1. If Adobe has defined a separate URL for each character's font subset, and the
+   Javascript requests many of those to cover the characters on a page, the set
+   of most-commonly-used web fonts may be large, as it will consist of the set
+   of all popular characters from all popular fonts.
+2. If Adobe has defined a query parameter or similar that specifies the set of
+   characters to include, there will probably be too many subsets for any of
+   them to appear commonly-used. These fonts will have to be re-downloaded for
+   each top-level site.
+
+There may be space for a new CSS specification to help browsers optimize this
+better.
+
 ## Considered alternatives
 
 ### Just define one list of fonts, not depending on locale
@@ -135,6 +156,12 @@ evolution.
 We consider a page load "broken" if it uses a different font before and after
 the new restrictions, and the "after" font was selected by a generic-family name
 or is the last-resort font.
+
+* A user who fetches all popular fonts for their locale uses no more than ??MB
+  of disk space.
+
+* TODO: Something about how much extra network transfer a ??%ile user uses after the
+  new restrictions.
 
 ## Stakeholder Feedback / Opposition
 
