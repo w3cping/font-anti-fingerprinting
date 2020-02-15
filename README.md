@@ -151,7 +151,10 @@ evolution.
 
 ## Metrics to justify shipping
 
-* <= 0.???% of page loads will be "broken" by the new restrictions.
+* Within each locale, <= 0.???% of page loads will be "broken" by the new
+  restrictions.
+
+* <= 0.0???% of overall page loads will be "broken" by the new restrictions.
 
 We consider a page load "broken" if it uses a different font before and after
 the new restrictions, and the "after" font was selected by a generic-family name
