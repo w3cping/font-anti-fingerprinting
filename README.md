@@ -6,6 +6,8 @@ the web. You're welcome to [contribute](CONTRIBUTING.md)!
 <!-- TOC -->
 
 - [Introduction](#introduction)
+- [Terminology](#terminology)
+  - [Locale](#locale)
 - [Goals](#goals)
 - [Non-goals](#non-goals)
 - [Proposal](#proposal)
@@ -29,15 +31,32 @@ the web. You're welcome to [contribute](CONTRIBUTING.md)!
 Differences in the set of fonts users have installed locally contribute many
 bits to a unique fingerprint of that user. TODO: link to some quantification.
 
+## Terminology
+
+### Locale
+
+Here a "locale" is the [tag](https://tools.ietf.org/html/rfc5646) negotiated by
+the `Accept-Language` header. This is often one language+country pair of the form
+"en-GB" but other variations are common, as described in RFC 5646:
+
+* ["es-419"](https://www.iana.org/assignments/lang-tag-apps/es-419) represents
+  Spanish ('es') appropriate to the UN-defined Latin America and Caribbean
+  region ('419').
+* "sr-Latn-RS" represents Serbian ('sr') written using Latin script ('Latn') as
+  used in Serbia ('RS').
+* ["zh-Hans-CN"](https://www.iana.org/assignments/lang-tag-apps/zh-Hans-CN)
+  represents Chinese ('zh') written in the Simplified script ('Hans') in China
+  ('CN').
+
+The locale is *not* the whole `Accept-Language` list.
+
 ## Goals
 
 Make font-based queries useless for distinguishing any two users running:
 
 * the same major version of the same browser
 * on the same version of the same operating system
-* in the same locale (the [tag](https://tools.ietf.org/html/rfc5646) negotiated
-  by the `Accept-Language` header, usually one language+country pair of the form
-  "en-GB", not the whole `Accept-Language` list).
+* in the same [locale](#locale).
 
 ## Non-goals
 
