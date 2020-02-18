@@ -21,7 +21,7 @@ the web. You're welcome to [contribute](CONTRIBUTING.md)!
   - [Just define one list of fonts, not depending on locale](#just-define-one-list-of-fonts-not-depending-on-locale)
   - [Define a set of local fonts](#define-a-set-of-local-fonts)
 - [Metrics to justify shipping](#metrics-to-justify-shipping)
-- [Stakeholder Feedback / Opposition](#stakeholder-feedback--opposition)
+- [Stakeholder Feedback / Support / Opposition](#stakeholder-feedback--support--opposition)
 - [References & acknowledgements](#references--acknowledgements)
 
 <!-- /TOC -->
@@ -82,10 +82,10 @@ negotiated language+country pair, not the whole `Accept-Language` list) to:
 
 ### Allowed system fonts
 
-This resembles Safari's hard-coded list of fonts usable from CSS. Ideally each
-operating system should provide a system API to determine whether a given font
-is pre-installed or user-installed. Browsers will only allow use of
-pre-installed fonts in places like the `@font-face` `src:`
+This resembles Safari's list of fonts usable from CSS, which it receives from an
+OS API. Ideally each operating system should provide a system API to determine
+whether a given font is pre-installed or user-installed. Browsers will only
+allow use of pre-installed fonts in places like the `@font-face` `src:`
 [`local()`](https://www.w3.org/TR/css-fonts-3/#font-face-name-value) function
 and the [`font-family`
 property](https://www.w3.org/TR/css-fonts-3/#font-family-prop).
@@ -186,7 +186,7 @@ or is the last-resort font.
 * TODO: Something about how much extra network transfer a ??%ile user uses after the
   new restrictions.
 
-## Stakeholder Feedback / Opposition
+## Stakeholder Feedback / Support / Opposition
 
 * CSSWG: No signals
 * Browsers:
@@ -194,7 +194,9 @@ or is the last-resort font.
   * Edge: No signals
   * Firefox: No signals
   * Opera: No signals
-  * Safari: No signals
+  * Safari: Support limiting font variation to be based on (browser,OS,locale).
+    Concern about aggressively caching web fonts, especially if it's done before
+    the user actually needs the font.
   * Samsung: No signals
   * UC: No signals
 * Web developers: No signals
@@ -204,6 +206,7 @@ or is the last-resort font.
 Many thanks for valuable feedback and advice from:
 
 * Pete Snyder
+* Safari for showing that a fixed local font list is web-compatible
 * Tab Atkins
 * The TAG for writing https://w3ctag.github.io/explainers
 * Other CSSWG folks on various bug threads
