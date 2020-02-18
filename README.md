@@ -171,7 +171,8 @@ evolution.
 ## Metrics to justify shipping
 
 * Within each locale, <= 0.???% of page loads will be "broken" by the new
-  restrictions.
+  restrictions. This criterion is meant to ensure we don't disenfrancise
+  minority languages or scripts.
 
 * <= 0.0???% of overall page loads will be "broken" by the new restrictions.
 
