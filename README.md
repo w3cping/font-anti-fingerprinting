@@ -58,6 +58,18 @@ Make font-based queries useless for distinguishing any two users running:
 * on the same version of the same operating system
 * in the same [locale](#locale).
 
+This identifiability should be minimized as much as possible, without harming
+the following use cases:
+
+* websites that expect an uncommon font to already be available in the visitor's
+  browser should continue to work as designed (e.g. don't break sites targeting
+  languages where users know they must install a uncommon-but-important-font).
+* web developers should be able to use uncommon fonts on their local machines,
+  for efficient, offline site development.
+* web users should be able to improve the performance of websites by
+  "pre-loading" fonts they expect they will need a lot (e.g. data sensitive
+  users can install web-fonts to prevent network load).
+
 ## Non-goals
 
 Attempts to reduce identifiability based on locale, browser, or OS choice are
@@ -90,18 +102,29 @@ allow use of pre-installed fonts in places like the `@font-face` `src:`
 and the [`font-family`
 property](https://www.w3.org/TR/css-fonts-3/#font-family-prop).
 
-### Aggressively-cached web fonts
+### Explicitly provide uncommon but desired fonts to the browser
 
-The set of most-commonly-used web fonts for each locale will be derived from
-metrics gathered from browser telemetry. We should share a single list across
-all browsers, and publicize this list so developers can rely on it. TODO: Figure
-out how much usage makes a font one of the most-commonly-used fonts. Is that a
-number or disk-size of fonts, a percentage of page loads, or what?
+The main source of identification in font-based fingerprinting is the long
+tail of fonts users have installed (sometimes w/o realizing it) that they
+**do not expect or intend websites to access**; fonts-intentionally installed
+for web-use are relatively un-identifying (both because many of these use
+cases will put users in significant anonymity sets, largely because users
+installing fonts needed for less-common-language sites will already overlap
+with the "locale" anonymity set).
 
-The first time a user visits a page that uses one of these fonts, it's
-downloaded and cached until it's no longer in the set of commonly-used fonts,
-which could be forever. See [When to cache the
-webfonts](#when-to-cache-the-webfonts).
+Browsers can maintain existing important use cases, w/o (in most cases)
+increasing the identifiability of the browser by removing the ambiguity
+between "fonts that were installed on the machine for non-web purposes" and
+"fonts that were installed on the machine for web purposes".  This should
+be accomplished through browser settings / "chrome" allowing users to explicitly
+describe which fonts the browser should be able to access
+**beyond the OS provided fonts**.
+
+This might take the form of selecting fonts the operating system knows about
+(e.g. Windows knows about these 30 fonts Windows didn't ship with, select
+which fonts you'd like websites to know about), or an alternate "install
+a font into the browser" flow.
+
 
 ## Key scenarios
 
