@@ -89,8 +89,10 @@ non-default fonts.
 
 ## Proposal
 
-Each browser will be able to map from a locale (as in [Goals](#goals), just the
-negotiated language+country pair, not the whole `Accept-Language` list) to:
+Each browser has a map from a [locale](#locale) to a set of fonts that it
+ensures are available locally, and which are the only fonts usable with
+`src:local()`(https://www.w3.org/TR/css-fonts-3/#font-face-name-value). There
+are several options for which fonts are in this set.
 
 ### Allowed system fonts
 
@@ -101,6 +103,19 @@ allow use of pre-installed fonts in places like the `@font-face` `src:`
 [`local()`](https://www.w3.org/TR/css-fonts-3/#font-face-name-value) function
 and the [`font-family`
 property](https://www.w3.org/TR/css-fonts-3/#font-family-prop).
+
+### Aggressively-cached web fonts
+
+The set of most-commonly-used web fonts for each locale will be derived from
+metrics gathered from browser telemetry. We should share a single list across
+all browsers, and publicize this list so developers can rely on it. TODO: Figure
+out how much usage makes a font one of the most-commonly-used fonts. Is that a
+number or disk-size of fonts, a percentage of page loads, or what?
+
+The first time a user visits a page that uses one of these fonts, it's
+downloaded and cached until it's no longer in the set of commonly-used fonts,
+which could be forever. See [When to cache the
+webfonts](#when-to-cache-the-webfonts).
 
 ### Explicitly provide uncommon but desired fonts to the browser
 
