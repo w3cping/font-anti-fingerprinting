@@ -13,6 +13,7 @@ the web. You're welcome to [contribute](CONTRIBUTING.md)!
 - [Proposal](#proposal)
   - [Allowed system fonts](#allowed-system-fonts)
   - [Aggressively-cached web fonts](#aggressively-cached-web-fonts)
+  - [Explicitly provide uncommon but desired fonts to the browser](#explicitly-provide-uncommon-but-desired-fonts-to-the-browser)
 - [Key scenarios](#key-scenarios)
 - [Detailed design discussion](#detailed-design-discussion)
   - [When to cache the webfonts](#when-to-cache-the-webfonts)
@@ -58,17 +59,16 @@ Make font-based queries useless for distinguishing any two users running:
 * on the same version of the same operating system
 * in the same [locale](#locale).
 
-This identifiability should be minimized as much as possible, without harming
-the following use cases:
+This identifiability should be minimized as much as possible, with as little
+harm as possible to the following use cases:
 
-* websites that expect an uncommon font to already be available in the visitor's
-  browser should continue to work as designed (e.g. don't break sites targeting
-  languages where users know they must install a uncommon-but-important-font).
-* web developers should be able to use uncommon fonts on their local machines,
-  for efficient, offline site development.
-* web users should be able to improve the performance of websites by
-  "pre-loading" fonts they expect they will need a lot (e.g. data sensitive
-  users can install web-fonts to prevent network load).
+* Web users who have been installing web fonts over cheap connections to avoid
+  spending money or time downloading them on expensive or slow connections,
+  shouldn't now have to use the expensive or slow connections.
+* Websites that depend on a font that's commonly installed among their visitors,
+  but uncommon on the web, should have a way to continue working.
+* Web developers should be able to use uncommon fonts on their local machines
+  even when developing offline.
 
 ## Non-goals
 
