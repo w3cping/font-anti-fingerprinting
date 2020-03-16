@@ -108,8 +108,8 @@ proposal. There is a tradeoff between:
   never uses
 * caching on first use, which might expose that a user visited
   one of a sensitive set of sites to an attacker,
-* not allowing this set of fonts at all, which either leads to slow and
-  expensive page loads or a need to change site or user behavior, and
+* not allowing this set of fonts at all, which can cause problems for users of
+  badly-supported minority languages, and
 * allowing font fingerprinting.
 
 Different browsers might make different choices within this tradeoff.
@@ -130,12 +130,12 @@ a font that a particular user never happens to need.
 
 Caching each font at the point where it's first used, if the cache never evicts
 fonts, allows exactly one site to determine that a user has not visited any site
-that either uses the font or has tried to learn this fact about the user. If
-exactly one attacker notices a sensitive set of sites using a font, and that set
-is large enough to make the font "common", and the attacker has logged-in users,
-they might be able to probe each user exactly once in order to distinguish users
-who've visited the sensitive set without polluting their sample with users who
-have previously been attacked.
+that either uses the font or has tried to learn this fact about the user. If an
+attacker notices that their logged-in users only use a "common" font on a
+particular sensitive set of sites, and they're the first attacker to notice for
+that set of users, they might be able to probe each user exactly once in order
+to distinguish users who've visited the sensitive set without polluting their
+sample with users who have previously been attacked.
 
 If the user removes a locale from their `Accept-Language` list, it's plausible to
 evict fonts that aren't common for their new set of locales. If the user then
