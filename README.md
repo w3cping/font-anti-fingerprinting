@@ -106,7 +106,7 @@ proposal. There is a tradeoff between:
 
 * precaching, which may waste transferred bytes for fonts that a particular user
   never uses
-* caching on first use, which in a few cases might expose that a user visited
+* caching on first use, which might expose that a user visited
   one of a sensitive set of sites to an attacker,
 * not allowing this set of fonts at all, which either leads to slow and
   expensive page loads or a need to change site or user behavior, and
