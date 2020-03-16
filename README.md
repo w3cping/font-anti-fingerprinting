@@ -62,8 +62,9 @@ Make font-based queries useless for distinguishing any two users running:
 This identifiability should be minimized as much as possible, with as little
 harm as possible to the following use cases:
 
-* Web users who have been installing web fonts over cheap connections to avoid
-  spending money or time downloading them on expensive or slow connections,
+* Web users with cheap connections who use badly-supported minority languages,
+  and thus have been installing fonts for their language locally
+  to avoid spending money or time downloading them on expensive or slow connections,
   shouldn't now have to use the expensive or slow connections.
 * Websites that depend on a font that's commonly installed among their visitors,
   but uncommon on the web, should have a way to continue working.
