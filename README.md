@@ -35,9 +35,9 @@ bits to a unique fingerprint of that user. TODO: link to some quantification.
 
 ### Locale
 
-Here a "locale" is the [tag](https://tools.ietf.org/html/rfc5646) negotiated by
+Here a "locale" is the [tag](https://tools.ietf.org/html/bcp47) negotiated by
 the `Accept-Language` header. This is often one language+country pair of the form
-"en-GB" but other variations are common, as described in RFC 5646:
+"en-GB" but other variations are common, as described in BCP 47:
 
 * ["es-419"](https://www.iana.org/assignments/lang-tag-apps/es-419) represents
   Spanish ('es') appropriate to the UN-defined Latin America and Caribbean
