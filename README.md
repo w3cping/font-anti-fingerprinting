@@ -13,6 +13,7 @@ the web. You're welcome to [contribute](CONTRIBUTING.md)!
 - [Proposal](#proposal)
   - [Allowed system fonts](#allowed-system-fonts)
   - [Aggressively-cached web fonts](#aggressively-cached-web-fonts)
+  - [Explicitly provide uncommon but desired fonts to the browser](#explicitly-provide-uncommon-but-desired-fonts-to-the-browser)
 - [Key scenarios](#key-scenarios)
 - [Detailed design discussion](#detailed-design-discussion)
   - [When to cache the webfonts](#when-to-cache-the-webfonts)
@@ -58,6 +59,17 @@ Make font-based queries useless for distinguishing any two users running:
 * on the same version of the same operating system
 * in the same [locale](#locale).
 
+This identifiability should be minimized as much as possible, with as little
+harm as possible to the following use cases:
+
+* Web users who have been installing web fonts over cheap connections to avoid
+  spending money or time downloading them on expensive or slow connections,
+  shouldn't now have to use the expensive or slow connections.
+* Websites that depend on a font that's commonly installed among their visitors,
+  but uncommon on the web, should have a way to continue working.
+* Web developers should be able to use uncommon fonts on their local machines
+  even when developing offline.
+
 ## Non-goals
 
 Attempts to reduce identifiability based on locale, browser, or OS choice are
@@ -77,8 +89,10 @@ non-default fonts.
 
 ## Proposal
 
-Each browser will be able to map from a locale (as in [Goals](#goals), just the
-negotiated language+country pair, not the whole `Accept-Language` list) to:
+Each browser has a map from a [locale](#locale) to a set of fonts that it
+ensures are available locally, and which are the only fonts usable with
+`src:local()`(https://www.w3.org/TR/css-fonts-3/#font-face-name-value). There
+are several options for which fonts are in this set.
 
 ### Allowed system fonts
 
@@ -102,6 +116,30 @@ The first time a user visits a page that uses one of these fonts, it's
 downloaded and cached until it's no longer in the set of commonly-used fonts,
 which could be forever. See [When to cache the
 webfonts](#when-to-cache-the-webfonts).
+
+### Explicitly provide uncommon but desired fonts to the browser
+
+The main source of identification in font-based fingerprinting is the long
+tail of fonts users have installed (sometimes w/o realizing it) that they
+**do not expect or intend websites to access**; fonts-intentionally installed
+for web-use are relatively un-identifying (both because many of these use
+cases will put users in significant anonymity sets, largely because users
+installing fonts needed for less-common-language sites will already overlap
+with the "locale" anonymity set).
+
+Browsers can maintain existing important use cases, w/o (in most cases)
+increasing the identifiability of the browser by removing the ambiguity
+between "fonts that were installed on the machine for non-web purposes" and
+"fonts that were installed on the machine for web purposes".  This should
+be accomplished through browser settings / "chrome" allowing users to explicitly
+describe which fonts the browser should be able to access
+**beyond the OS provided fonts**.
+
+This might take the form of selecting fonts the operating system knows about
+(e.g. Windows knows about these 30 fonts Windows didn't ship with, select
+which fonts you'd like websites to know about), or an alternate "install
+a font into the browser" flow.
+
 
 ## Key scenarios
 
