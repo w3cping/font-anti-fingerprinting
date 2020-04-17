@@ -101,8 +101,8 @@ Browsers only allow *pre-installed* fonts in places like the `@font-face` `src:`
 and the [`font-family`
 property](https://www.w3.org/TR/css-fonts-3/#font-family-prop). Safari currently
 does this by passing a bit to the OS font lookup routines that prevents them
-from finding user- or application-installed fonts. Apple intends to expose that
-API publicly, and we hope that other operating systems will follow suit.
+from finding user- or application-installed fonts. Apple is considering exposing
+that API publicly, and we hope that other operating systems will follow suit.
 
 ### Aggressively-cached web fonts
 
