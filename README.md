@@ -96,13 +96,13 @@ are several options for which fonts are in this set.
 
 ### Allowed system fonts
 
-This resembles Safari's list of fonts usable from CSS, which it receives from an
-OS API. Ideally each operating system should provide a system API to determine
-whether a given font is pre-installed or user-installed. Browsers will only
-allow use of pre-installed fonts in places like the `@font-face` `src:`
+Browsers only allow *pre-installed* fonts in places like the `@font-face` `src:`
 [`local()`](https://www.w3.org/TR/css-fonts-3/#font-face-name-value) function
 and the [`font-family`
-property](https://www.w3.org/TR/css-fonts-3/#font-family-prop).
+property](https://www.w3.org/TR/css-fonts-3/#font-family-prop). Safari currently
+does this by passing a bit to the OS font lookup routines that prevents them
+from finding user- or application-installed fonts. Apple is considering exposing
+that API publicly, and we hope that other operating systems will follow suit.
 
 ### Aggressively-cached web fonts
 
