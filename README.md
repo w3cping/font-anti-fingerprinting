@@ -112,10 +112,23 @@ all browsers, and publicize this list so developers can rely on it. TODO: Figure
 out how much usage makes a font one of the most-commonly-used fonts. Is that a
 number or disk-size of fonts, a percentage of page loads, or what?
 
-The first time a user visits a page that uses one of these fonts, it's
-downloaded and cached until it's no longer in the set of commonly-used fonts,
-which could be forever. See [When to cache the
-webfonts](#when-to-cache-the-webfonts).
+This set of fonts is aggressively downloaded and cached until it's no longer in
+the set of commonly-used fonts, which could be forever. The details of when to
+download the fonts should align with the [Web Shared
+Libraries](https://docs.google.com/document/d/1lQykm9HgzkPlaKXwpQ9vNc3m2Eq2hF4TY-Vup5wg4qg/edit)
+proposal. There is a tradeoff between:
+
+* precaching, which may waste transferred bytes for fonts that a particular user
+  never uses
+* caching on first use, which might expose that a user visited
+  one of a sensitive set of sites to an attacker,
+* not allowing this set of fonts at all, which can cause problems for users of
+  badly-supported minority languages, and
+* allowing font fingerprinting.
+
+Different browsers might make different choices within this tradeoff.
+
+See [When to cache the webfonts](#when-to-cache-the-webfonts).
 
 ### Explicitly provide uncommon but desired fonts to the browser
 
@@ -149,14 +162,18 @@ TODO: look through discussion threads to check that this solves the objections.
 
 ### When to cache the webfonts
 
-It would be safest to pre-cache all of these fonts when a new major version of a
+It's safest to pre-cache all of these fonts when a new major version of a
 browser is installed, but this might waste valuable bandwidth and disk space for
 a font that a particular user never happens to need.
 
-I believe it's also safe to cache each font at the point where it's first used,
-as long as the cache never evicts fonts. This allows exactly one site to
-determine that a user has not visited any site that either uses the font or has
-tried to learn this fact about the user.
+Caching each font at the point where it's first used, if the cache never evicts
+fonts, allows exactly one site to determine that a user has not visited any site
+that either uses the font or has tried to learn this fact about the user. If an
+attacker notices that their logged-in users only use a "common" font on a
+particular sensitive set of sites, and they're the first attacker to notice for
+that set of users, they might be able to probe each user exactly once in order
+to distinguish users who've visited the sensitive set without polluting their
+sample with users who have previously been attacked.
 
 If the user removes a locale from their `Accept-Language` list, it's plausible to
 evict fonts that aren't common for their new set of locales. If the user then
