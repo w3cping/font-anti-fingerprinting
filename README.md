@@ -230,7 +230,8 @@ or is the last-resort font.
 * Browsers:
   * Chrome: Positive
   * Edge: No signals
-  * Firefox: No signals
+  * Firefox: Harmful: avoid any dependence between the performance
+    characteristics of site X and previous visits to site Y.
   * Opera: No signals
   * Safari: Support limiting font variation to be based on (browser,OS,locale).
     Concern about aggressively caching web fonts, especially if it's done before
