@@ -1,7 +1,8 @@
 # Font Anti-Fingerprinting
 
 This is an early draft of a proposal to eliminate font-based fingerprinting on
-the web. You're welcome to [contribute](CONTRIBUTING.md)!
+the web. That is, ***this is not PING consensus!*** You're welcome to
+[contribute](CONTRIBUTING.md)!
 
 <!-- TOC -->
 
